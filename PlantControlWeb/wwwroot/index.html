@@ -1,0 +1,351 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PlantControl</title>
+
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <div id="dashboard-error" class="dashboard-error" hidden>
+            <span class="dashboard-error-icon">⚠</span>
+            <div>
+                <strong>No se pudo conectar con PlantControl</strong>
+                <span>Verifica que el servidor esté disponible.</span>
+            </div>
+        </div>
+
+        <!-- HEADER -->
+        <header class="header">
+
+            <div class="brand">
+
+                <div class="brand-icon">
+                    🌱
+                </div>
+
+                <div>
+                    <h1>PlantControl</h1>
+                    <p id="device-name">
+                        Cargando dispositivo...
+                    </p>
+                </div>
+
+            </div>
+
+
+            <div class="device-status" id="device-status">
+
+                <span class="status-dot"></span>
+
+                <div>
+                    <strong id="device-status-text">
+                        CARGANDO
+                    </strong>
+
+                    <small>
+                        Estado del sistema
+                    </small>
+                </div>
+
+            </div>
+
+        </header>
+
+
+        <!-- DEVICE INFORMATION -->
+        <section class="device-info">
+
+            <div>
+                <span class="label">DISPOSITIVO</span>
+                <strong id="device-uid">---</strong>
+            </div>
+
+            <div>
+                <span class="label">FIRMWARE</span>
+                <strong id="firmware-version">---</strong>
+            </div>
+
+            <div>
+                <span class="label">ÚLTIMA CONEXIÓN</span>
+                <strong id="last-seen">---</strong>
+            </div>
+
+        </section>
+
+
+        <!-- ENVIRONMENT CARDS -->
+        <section class="environment-grid">
+
+            <!-- TEMPERATURA DEL AIRE -->
+            <article class="sensor-card">
+
+                <div class="sensor-header">
+                    <span class="sensor-icon">🌡️</span>
+
+                    <span class="sensor-name">
+                        Temperatura
+                    </span>
+                </div>
+
+                <div class="sensor-value">
+                    <span id="temperature-air">--</span>
+                    <span>°C</span>
+                </div>
+
+                <div class="sensor-status" id="temperature-air-status">
+                    --
+                </div>
+
+                <div class="sensor-progress">
+                    <div class="sensor-progress-bar"
+                         id="temperature-air-progress">
+                    </div>
+                </div>
+
+                <div class="sensor-range" id="temperature-air-range">
+                    Rango: --
+                </div>
+
+            </article>
+
+
+            <!-- TEMPERATURA DEL SUSTRATO -->
+            <article class="sensor-card">
+
+                <div class="sensor-header">
+                    <span class="sensor-icon">🌱</span>
+
+                    <span class="sensor-name">
+                        Sustrato
+                    </span>
+                </div>
+
+                <div class="sensor-value">
+                    <span id="temperature-soil">--</span>
+                    <span>°C</span>
+                </div>
+
+                <div class="sensor-status" id="temperature-soil-status">
+                    --
+                </div>
+
+                <div class="sensor-progress">
+                    <div class="sensor-progress-bar"
+                         id="temperature-soil-progress">
+                    </div>
+                </div>
+
+                <div class="sensor-range" id="temperature-soil-range">
+                    Rango: --
+                </div>
+
+            </article>
+
+
+            <!-- HUMEDAD AMBIENTE -->
+            <article class="sensor-card">
+
+                <div class="sensor-header">
+                    <span class="sensor-icon">💧</span>
+
+                    <span class="sensor-name">
+                        Humedad
+                    </span>
+                </div>
+
+                <div class="sensor-value">
+                    <span id="humidity">--</span>
+                    <span>%</span>
+                </div>
+
+                <div class="sensor-status" id="humidity-status">
+                    --
+                </div>
+
+                <div class="sensor-progress">
+                    <div class="sensor-progress-bar"
+                         id="humidity-progress">
+                    </div>
+                </div>
+
+                <div class="sensor-range" id="humidity-range">
+                    Rango: --
+                </div>
+
+            </article>
+
+
+            <!-- HUMEDAD DEL SUSTRATO -->
+            <article class="sensor-card">
+
+                <div class="sensor-header">
+                    <span class="sensor-icon">🪴</span>
+
+                    <span class="sensor-name">
+                        Humedad del sustrato
+                    </span>
+                </div>
+
+                <div class="sensor-value">
+                    <span id="soil-moisture">--</span>
+                    <span>%</span>
+                </div>
+
+                <div class="sensor-status" id="soil-moisture-status">
+                    --
+                </div>
+
+                <div class="sensor-progress">
+                    <div class="sensor-progress-bar"
+                         id="soil-moisture-progress">
+                    </div>
+                </div>
+
+                <div class="sensor-range" id="soil-moisture-range">
+                    Rango: --
+                </div>
+
+            </article>
+
+
+            <!-- ILUMINACIÓN -->
+            <article class="sensor-card">
+
+                <div class="sensor-header">
+                    <span class="sensor-icon">☀️</span>
+
+                    <span class="sensor-name">
+                        Iluminación
+                    </span>
+                </div>
+
+                <div class="sensor-value">
+                    <span id="light">--</span>
+                    <span>lux</span>
+                </div>
+
+                <div class="sensor-status" id="light-status">
+                    --
+                </div>
+
+                <div class="sensor-progress">
+                    <div class="sensor-progress-bar"
+                         id="light-progress">
+                    </div>
+                </div>
+
+                <div class="sensor-range" id="light-range">
+                    Rango: --
+                </div>
+
+            </article>
+
+        </section>
+
+
+        <!-- CHART -->
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Condiciones ambientales</h2>
+                    <p>Últimas mediciones</p>
+                </div>
+
+                <select id="chart-period">
+                    <option value="2">Últimas 2 horas</option>
+                    <option value="6">Últimas 6 horas</option>
+                    <option value="24" selected>Últimas 24 horas</option>
+                </select>
+
+            </div>
+
+            <div class="chart-container">
+
+                <canvas id="temperature-chart"></canvas>
+
+            </div>
+
+            <div class="chart-container">
+
+                <canvas id="environment-chart"></canvas>
+
+            </div>
+
+        </section>
+
+
+        <!-- ACTUATORS -->
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Actuadores</h2>
+                    <p>Estado actual del sistema</p>
+                </div>
+
+            </div>
+
+
+            <div class="actuators-grid" id="actuators-container">
+
+                <div class="loading-message">
+                    Cargando actuadores...
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ALERTS -->
+        <section class="panel">
+
+            <div class="panel-header">
+
+                <div>
+                    <h2>Alertas activas</h2>
+                    <p>Situaciones que requieren atención</p>
+                </div>
+
+            </div>
+
+            <div class="alerts-container"
+                 id="alerts-container">
+
+                <div class="no-alerts">
+                    ✓ No hay alertas activas
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- FOOTER -->
+        <footer>
+
+            <span>PlantControl</span>
+
+            <span>Sistema de monitoreo ambiental</span>
+
+        </footer>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="/js/dashboard.js"></script>
+
+</body>
+
+</html>
